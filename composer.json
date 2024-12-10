@@ -1,0 +1,33 @@
+{
+    "name": "fahemdev/extra-icons",
+    "description": "A plugin to add extra icon packages to Filament.",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "FahemDev\\ExtraIcons\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "FahemDev",
+            "homepage": "https://fahemdev.com",
+            "email": "info@fahemdev.com"
+        }
+    ],
+    "require": {
+        "php": "^8.1",
+        "blade-ui-kit/blade-icons": "^1.6",
+        "illuminate/support": "^10.34|^11.0",
+        "filament/filament": "^3.0"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "FahemDev\\ExtraIcons\\ExtraIconsServiceProvider"
+            ]
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
