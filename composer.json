@@ -29,6 +29,14 @@
             ]
         }
     },
+    "scripts": {
+        "post-install-cmd": [
+            "@php artisan extra-icons:configure"
+        ],
+        "post-update-cmd": [
+            "@php artisan extra-icons:configure"
+        ]
+    },
     "minimum-stability": "dev",
     "prefer-stable": true
 }
