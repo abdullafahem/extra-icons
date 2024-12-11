@@ -84,7 +84,37 @@ Example configuration:
 
 ## Contributing
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+We welcome contributions to the Extra Icons package! Here's how you can help:
+
+1. **Fork the Repository**
+   - Click the "Fork" button at the top right of the repository page
+   - Clone your forked repository to your local machine:
+     ```bash
+     git clone https://github.com/your-username/extra-icons.git
+     cd extra-icons
+     ```
+
+2. **Create a Branch**
+   ```bash
+   git checkout -b feature/your-feature-name
+   ```
+
+3. **Make Your Changes**
+   - Implement your feature or bug fix
+   - Ensure your code follows the project's coding standards
+   - Add tests if applicable
+
+4. **Commit and Push**
+   ```bash
+   git add .
+   git commit -m "Description of your changes"
+   git push origin feature/your-feature-name
+   ```
+
+5. **Create a Pull Request**
+   - Open a pull request from your fork to the main repository
+   - **Important:** Please notify the maintainer (FahemDev) about your contribution
+   - Provide a clear description of your changes and their purpose
 
 ## License
 
