@@ -44,6 +44,14 @@ php artisan vendor:publish --tag="extra-icons-config"
 
 This will create a `config/extra-icons.php` file where you can customize icon settings.
 
+## Publishing Icon Resources
+
+Publish the icon resources (optional):
+
+```bash
+php artisan extra-icons:publish
+```
+
 ## Usage in Filament
 
 In your Filament resources, forms, or actions, you can now use icons from various libraries:
