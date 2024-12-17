@@ -1,7 +1,7 @@
 {
     "name": "fahemdev/extra-icons",
     "description": "A plugin to add extra icon packages to Filament.",
-    "version": "1.0.3",
+    "version": "1.0.2",
     "type": "library",
     "license": "MIT",
     "autoload": {
