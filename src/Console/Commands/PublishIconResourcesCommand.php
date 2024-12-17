@@ -29,52 +29,52 @@ class PublishIconResourcesCommand extends Command
     protected $iconPackages = [
         'bootstrap' => [
             'name' => 'Bootstrap Icons',
-            'source' => 'resources/svg/bootstrap',
+            'source' => 'vendor/fahemdev/extra-icons/resources/svg/bootstrap',
             'destination' => 'fahemdev/extra-icons/resources/bootstrap'
         ],
         'feather' => [
             'name' => 'Feather Icons',
-            'source' => 'resources/svg/feather',
+            'source' => 'vendor/fahemdev/extra-icons/resources/svg/feather',
             'destination' => 'fahemdev/extra-icons/resources/feather'
         ],
         'ion' => [
             'name' => 'Ionicons',
-            'source' => 'resources/svg/ion',
+            'source' => 'vendor/fahemdev/extra-icons/resources/svg/ion',
             'destination' => 'fahemdev/extra-icons/resources/ion'
         ],
         'tabler' => [
             'name' => 'Tabler Icons',
-            'source' => 'resources/svg/tabler',
+            'source' => 'vendor/fahemdev/extra-icons/resources/svg/tabler',
             'destination' => 'fahemdev/extra-icons/resources/tabler'
         ],
         'octicon' => [
             'name' => 'Octicons',
-            'source' => 'resources/svg/octicon',
+            'source' => 'vendor/fahemdev/extra-icons/resources/svg/octicon',
             'destination' => 'fahemdev/extra-icons/resources/octicon'
         ],
         'fontawesome-brands' => [
             'name' => 'Font Awesome Brands',
-            'source' => 'resources/svg/fontawesome-brands',
+            'source' => 'vendor/fahemdev/extra-icons/resources/svg/fontawesome-brands',
             'destination' => 'fahemdev/extra-icons/resources/fontawesome-brands'
         ],
         'fontawesome-regular' => [
             'name' => 'Font Awesome Regular',
-            'source' => 'resources/svg/fontawesome-regular',
+            'source' => 'vendor/fahemdev/extra-icons/resources/svg/fontawesome-regular',
             'destination' => 'fahemdev/extra-icons/resources/fontawesome-regular'
         ],
         'fontawesome-solid' => [
             'name' => 'Font Awesome Solid',
-            'source' => 'resources/svg/fontawesome-solid',
+            'source' => 'vendor/fahemdev/extra-icons/resources/svg/fontawesome-solid',
             'destination' => 'fahemdev/extra-icons/resources/fontawesome-solid'
         ],
         'ant' => [
             'name' => 'Ant Design Icons',
-            'source' => 'resources/svg/ant',
+            'source' => 'vendor/fahemdev/extra-icons/resources/svg/ant',
             'destination' => 'fahemdev/extra-icons/resources/ant'
         ],
         'huge' => [
             'name' => 'Huge Icons',
-            'source' => 'resources/svg/huge',
+            'source' => 'vendor/fahemdev/extra-icons/resources/svg/huge',
             'destination' => 'fahemdev/extra-icons/resources/huge'
         ]
     ];
