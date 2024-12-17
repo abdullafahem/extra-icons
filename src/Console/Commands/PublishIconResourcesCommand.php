@@ -92,13 +92,13 @@ class PublishIconResourcesCommand extends Command
         $choice = $this->choice(
             'Would you like to publish specific icon packages or all packages?',
             [
-                'all' => 'Publish All Packages',
-                'select' => 'Select Specific Packages',
+                '0' => 'Publish All Packages',
+                '1' => 'Select Specific Packages',
             ],
-            'all'
+            '0'
         );
 
-        if ($choice === 'all') {
+        if ($choice === '0') {
             $this->publishAllPackages();
         } else {
             $this->publishSelectedPackages();
