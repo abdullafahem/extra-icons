@@ -3,7 +3,7 @@
 namespace Fahemdev\ExtraIcons\Console\Commands;
 
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\File;
 
 class PublishIconResourcesCommand extends Command
 {
@@ -27,16 +27,56 @@ class PublishIconResourcesCommand extends Command
      * @var array
      */
     protected $iconPackages = [
-        'bootstrap' => 'Bootstrap Icons',
-        'feather' => 'Feather Icons',
-        'ion' => 'Ionicons',
-        'tabler' => 'Tabler Icons',
-        'octicon' => 'Octicons',
-        'fontawesome-brands' => 'Font Awesome Brands',
-        'fontawesome-regular' => 'Font Awesome Regular',
-        'fontawesome-solid' => 'Font Awesome Solid',
-        'ant' => 'Ant Design Icons',
-        'huge' => 'Huge Icons',
+        'bootstrap' => [
+            'name' => 'Bootstrap Icons',
+            'source' => '../../resources/icons/bootstrapicons',
+            'destination' => 'fahemdev/extra-icons/resources/bootstrap'
+        ],
+        'feather' => [
+            'name' => 'Feather Icons',
+            'source' => '../../resources/icons/feathericons',
+            'destination' => 'fahemdev/extra-icons/resources/feather'
+        ],
+        'ion' => [
+            'name' => 'Ionicons',
+            'source' => '../../resources/icons/ionicons',
+            'destination' => 'fahemdev/extra-icons/resources/ion'
+        ],
+        'tabler' => [
+            'name' => 'Tabler Icons',
+            'source' => '../../resources/icons/tablericons',
+            'destination' => 'fahemdev/extra-icons/resources/tabler'
+        ],
+        'octicon' => [
+            'name' => 'Octicons',
+            'source' => '../../resources/icons/octicons',
+            'destination' => 'fahemdev/extra-icons/resources/octicon'
+        ],
+        'fontawesome-brands' => [
+            'name' => 'Font Awesome Brands',
+            'source' => '../../resources/icons/fontawesome/brands',
+            'destination' => 'fahemdev/extra-icons/resources/fontawesome-brands'
+        ],
+        'fontawesome-regular' => [
+            'name' => 'Font Awesome Regular',
+            'source' => '../../resources/icons/fontawesome/regular',
+            'destination' => 'fahemdev/extra-icons/resources/fontawesome-regular'
+        ],
+        'fontawesome-solid' => [
+            'name' => 'Font Awesome Solid',
+            'source' => '../../resources/icons/fontawesome/solid',
+            'destination' => 'fahemdev/extra-icons/resources/fontawesome-solid'
+        ],
+        'ant' => [
+            'name' => 'Ant Design Icons',
+            'source' => '../../resources/icons/antdesignicons',
+            'destination' => 'fahemdev/extra-icons/resources/ant'
+        ],
+        'huge' => [
+            'name' => 'Huge Icons',
+            'source' => '../../resources/icons/hugeicons',
+            'destination' => 'fahemdev/extra-icons/resources/huge'
+        ]
     ];
 
     /**
@@ -63,6 +103,8 @@ class PublishIconResourcesCommand extends Command
         } else {
             $this->publishSelectedPackages();
         }
+
+        $this->info('Icon resources published successfully!');
     }
 
     /**
@@ -72,8 +114,8 @@ class PublishIconResourcesCommand extends Command
      */
     protected function publishAllPackages()
     {
-        foreach ($this->iconPackages as $package => $name) {
-            $this->publishPackage($package, $name);
+        foreach ($this->iconPackages as $package => $details) {
+            $this->publishPackage($package, $details);
         }
     }
 
@@ -84,21 +126,26 @@ class PublishIconResourcesCommand extends Command
      */
     protected function publishSelectedPackages()
     {
-        $selectedPackages = $this->choice(
+        $packageOptions = array_map(function ($details) {
+            return $details['name'];
+        }, $this->iconPackages);
+
+        $selectedPackageNames = $this->choice(
             'Select icon packages to publish (use comma to select multiple)',
-            $this->iconPackages,
+            $packageOptions,
             null,
             null,
             true
         );
 
-        if (empty($selectedPackages)) {
+        if (empty($selectedPackageNames)) {
             $this->warn('No packages selected. Publishing all packages by default.');
             $this->publishAllPackages();
             return;
         }
 
-        foreach ($selectedPackages as $package) {
+        foreach ($selectedPackageNames as $selectedName) {
+            $package = array_search($selectedName, $packageOptions);
             $this->publishPackage($package, $this->iconPackages[$package]);
         }
     }
@@ -107,22 +154,25 @@ class PublishIconResourcesCommand extends Command
      * Publish a specific icon package.
      *
      * @param string $package
-     * @param string $name
+     * @param array $details
      * @return void
      */
-    protected function publishPackage(string $package, string $name)
+    protected function publishPackage(string $package, array $details)
     {
-        $this->info("Publishing {$name}...");
+        $sourcePath = $details['source'];
+        $destinationPath = resource_path($details['destination']);
 
-        try {
-            Artisan::call('vendor:publish', [
-                '--tag' => "extra-icons-{$package}",
-                '--force' => true
-            ]);
-
-            $this->info("{$name} published successfully!");
-        } catch (\Exception $e) {
-            $this->error("Failed to publish {$name}: " . $e->getMessage());
+        if (!File::exists($sourcePath)) {
+            $this->error("Source path for {$details['name']} does not exist.");
+            return;
         }
+
+        // Ensure destination directory exists
+        File::makeDirectory($destinationPath, 0755, true, true);
+
+        // Copy icon files
+        File::copyDirectory($sourcePath, $destinationPath);
+
+        $this->info("Published {$details['name']} to resources/{$details['destination']}");
     }
 }
