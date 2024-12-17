@@ -29,52 +29,52 @@ class PublishIconResourcesCommand extends Command
     protected $iconPackages = [
         'bootstrap' => [
             'name' => 'Bootstrap Icons',
-            'source' => '../../resources/svg/icons/bootstrapicons',
+            'source' => 'resources/svg/bootstrap',
             'destination' => 'fahemdev/extra-icons/resources/bootstrap'
         ],
         'feather' => [
             'name' => 'Feather Icons',
-            'source' => '../../resources/svg/icons/feathericons',
+            'source' => 'resources/svg/feather',
             'destination' => 'fahemdev/extra-icons/resources/feather'
         ],
         'ion' => [
             'name' => 'Ionicons',
-            'source' => '../../resources/svg/icons/ionicons',
+            'source' => 'resources/svg/ion',
             'destination' => 'fahemdev/extra-icons/resources/ion'
         ],
         'tabler' => [
             'name' => 'Tabler Icons',
-            'source' => '../../resources/svg/icons/tablericons',
+            'source' => 'resources/svg/tabler',
             'destination' => 'fahemdev/extra-icons/resources/tabler'
         ],
         'octicon' => [
             'name' => 'Octicons',
-            'source' => '../../resources/svg/icons/octicons',
+            'source' => 'resources/svg/octicon',
             'destination' => 'fahemdev/extra-icons/resources/octicon'
         ],
         'fontawesome-brands' => [
             'name' => 'Font Awesome Brands',
-            'source' => '../../resources/svg/icons/fontawesome/brands',
+            'source' => 'resources/svg/fontawesome-brands',
             'destination' => 'fahemdev/extra-icons/resources/fontawesome-brands'
         ],
         'fontawesome-regular' => [
             'name' => 'Font Awesome Regular',
-            'source' => '../../resources/svg/icons/fontawesome/regular',
+            'source' => 'resources/svg/fontawesome-regular',
             'destination' => 'fahemdev/extra-icons/resources/fontawesome-regular'
         ],
         'fontawesome-solid' => [
             'name' => 'Font Awesome Solid',
-            'source' => '../../resources/svg/icons/fontawesome/solid',
+            'source' => 'resources/svg/fontawesome-solid',
             'destination' => 'fahemdev/extra-icons/resources/fontawesome-solid'
         ],
         'ant' => [
             'name' => 'Ant Design Icons',
-            'source' => '../../resources/svg/icons/antdesignicons',
+            'source' => 'resources/svg/ant',
             'destination' => 'fahemdev/extra-icons/resources/ant'
         ],
         'huge' => [
             'name' => 'Huge Icons',
-            'source' => '../../resources/svg/icons/hugeicons',
+            'source' => 'resources/svg/huge',
             'destination' => 'fahemdev/extra-icons/resources/huge'
         ]
     ];
@@ -126,13 +126,12 @@ class PublishIconResourcesCommand extends Command
      */
     protected function publishSelectedPackages()
     {
-        $packageOptions = array_map(function ($details) {
-            return $details['name'];
-        }, $this->iconPackages);
+        $packageOptions = array_keys($this->iconPackages);
+        $packageNames = array_column($this->iconPackages, 'name');
 
         $selectedPackageNames = $this->choice(
             'Select icon packages to publish (use comma to select multiple)',
-            $packageOptions,
+            $packageNames,
             null,
             null,
             true
@@ -145,8 +144,11 @@ class PublishIconResourcesCommand extends Command
         }
 
         foreach ($selectedPackageNames as $selectedName) {
-            $package = array_search($selectedName, $packageOptions);
-            $this->publishPackage($package, $this->iconPackages[$package]);
+            $packageIndex = array_search($selectedName, $packageNames);
+            if ($packageIndex !== false) {
+                $package = $packageOptions[$packageIndex];
+                $this->publishPackage($package, $this->iconPackages[$package]);
+            }
         }
     }
 
@@ -159,11 +161,11 @@ class PublishIconResourcesCommand extends Command
      */
     protected function publishPackage(string $package, array $details)
     {
-        $sourcePath = $details['source'];
+        $sourcePath = base_path($details['source']);
         $destinationPath = resource_path($details['destination']);
 
         if (!File::exists($sourcePath)) {
-            $this->error("Source path for {$details['name']} does not exist.");
+            $this->error("Source path for {$details['name']} does not exist: {$sourcePath}");
             return;
         }
 
