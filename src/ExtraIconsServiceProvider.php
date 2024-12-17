@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace FahemDev\ExtraIcons;
 
 use BladeUI\Icons\Factory;
+use Fahemdev\ExtraIcons\Console\Commands\PublishIconResourcesCommand;
 use Filament\Panel;
 use Illuminate\Contracts\Container\Container;
 use Illuminate\Support\ServiceProvider;
@@ -49,7 +50,7 @@ class ExtraIconsServiceProvider extends ServiceProvider
 
         if ($this->app->runningInConsole()) {
             $this->commands([
-                \FahemDev\ExtraIcons\Console\Commands\ConfigureExtraIcons::class,
+                PublishIconResourcesCommand::class,
             ]);
 
             $this->publishes([
