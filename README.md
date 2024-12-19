@@ -52,6 +52,8 @@ Publish the icon resources (optional):
 php artisan extra-icons:publish
 ```
 
+This will create icon folders in the resources folder `extra-icons/resources/icon-package-name` file where you can find icons.
+
 ## Usage in Filament
 
 In your Filament resources, forms, or actions, you can now use icons from various libraries:
