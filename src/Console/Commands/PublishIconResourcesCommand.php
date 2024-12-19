@@ -139,7 +139,6 @@ class PublishIconResourcesCommand extends Command
 
         if (empty($selectedPackageNames)) {
             $this->warn('No packages selected. Publishing all packages by default.');
-            $this->publishAllPackages();
             return;
         }
 
