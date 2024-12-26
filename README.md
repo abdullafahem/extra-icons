@@ -1,5 +1,12 @@
 # Extra Icons for Filament
 
+<a href="https://packagist.org/packages/blade-ui-kit/blade-icons">
+    <img src="https://img.shields.io/packagist/v/fahemdev/extra-icons" alt="Latest Stable Version">
+</a>
+<a href="https://packagist.org/packages/blade-ui-kit/blade-icons">
+    <img src="https://img.shields.io/packagist/dt/fahemdev/extra-icons" alt="Total Downloads">
+</a>
+
 A comprehensive Filament plugin that adds multiple icon packages to enhance your Laravel Filament applications.
 
 ## Features
