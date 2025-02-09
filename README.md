@@ -8,6 +8,7 @@
 </a>
 
 A comprehensive Filament plugin that adds multiple icon packages to enhance your Laravel Filament applications.
+![fahemdev-extra-icons](https://github.com/user-attachments/assets/d5c42895-6835-4062-b909-d28fab4f403e)
 
 ## Features
 
